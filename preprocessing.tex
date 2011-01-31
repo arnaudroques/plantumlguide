@@ -1,0 +1,154 @@
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+
+\section{Preprocessing}
+
+
+Some minor preprocessing capabilities are included in PlantUML, and available for all diagrams. 
+
+Thoses functionnalities are very similar to the \textbf{C} language
+preprocessor, except that the special character "\texttt{\#}" has been changed
+to the exclamation mark "\texttt{!}".
+
+% ========================================================================
+\subsection{Including files} 
+
+Use the \texttt{!include} directive to include file in your diagram. 
+
+Imagine you have the very same class that appears in many diagrams. Instead of duplicating the 
+description of this class, you can define a file that contains the description. 
+
+\begin{lstlisting}
+@startuml
+!include List.iuml 
+List <|.. ArrayList
+@enduml 
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=25mm]{preprocessing.png}
+\end{center}
+
+
+File List.iuml: 
+\begin{lstlisting}
+interface List 
+List : int size()
+List : void clear() 
+\end{lstlisting}
+
+
+The file \texttt{List.iuml} can be included in many diagrams, and any
+modification in this file will change all diagrams that include it. 
+
+% ========================================================================
+\newpage \subsection{Constant definition} 
+
+You can define constant using the \texttt{!define} directive. As in \textbf{C}
+language, a constant name can only use alphanumeric and underscore characters, and cannot start with a digit. 
+
+\begin{lstlisting}
+@startuml 
+
+!define SEQUENCE (S,#AAAAAA) Database Sequence
+!define TABLE (T,#FFAAAA) Database Table 
+
+
+class USER << TABLE >> 
+class ACCOUNT << TABLE >> 
+class UID << SEQUENCE >>
+USER "1" -- "*" ACCOUNT 
+USER -> UID 
+
+@enduml 
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=80mm]{preprocessing_001.png}
+\end{center}
+
+
+
+Of course, you can use the \texttt{!include} directive to define all your
+constants in a single file that you include in your diagram. 
+
+Constant can be undefined with the \texttt{!undef} XXX directive. 
+
+% ========================================================================
+\newpage \subsection{Conditions} 
+
+You can use \texttt{!ifdef XXX} and \texttt{!endif} directives to have
+conditionnal drawings.
+
+The lines between those two directives will be included only if the constant
+after the \texttt{!ifdef} directive has been defined before. 
+
+You can also provide a \texttt{!else} part which will be included if the
+constant has not been defined.
+
+\begin{lstlisting}
+@startuml
+!include ArrayList.iuml
+@enduml 
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=25mm]{preprocessing_002.png}
+\end{center}
+
+
+File ArrayList.iuml: 
+\begin{lstlisting}
+class ArrayList
+!ifdef SHOW_METHODS 
+ArrayList : int size()
+ArrayList : void clear()
+!endif 
+\end{lstlisting}
+
+
+
+You can then use the \texttt{!define} directive to activate the conditionnal
+part of the diagram.
+
+\begin{lstlisting}
+@startuml
+!define SHOW_METHODS 
+!include ArrayList.iuml
+@enduml 
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=25mm]{preprocessing_003.png}
+\end{center}
+
+
+You can also use the \texttt{!ifndef} directive that includes lines if the
+provided constant has \textit{NOT} been defined. 
+

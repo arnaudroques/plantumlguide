@@ -1,0 +1,436 @@
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+
+\section{Activity Diagram}
+
+% ========================================================================
+\subsection{Simple Activity}
+
+\begin{description}
+\item
+You can use \texttt{(*)} for the starting point and ending point of the activity
+diagram.
+
+\item
+Use \texttt{-->} for arrows.
+
+\end{description}
+
+Example:
+
+\begin{lstlisting}
+@startuml
+(*) --> "First Activity"
+"First Activity" --> (*)
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=40mm]{activity.png}
+\end{center}
+
+% ========================================================================
+\subsection{Label on arrows}
+
+\begin{description}
+\item By default, an arrow starts at the last used activity.
+\item You can put a label on a arrow using brackets \texttt{[} and \texttt{]}
+just after the arrow definition.
+\end{description}
+
+
+\begin{lstlisting}
+@startuml
+(*) --> "First Activity"
+-->[You can put also labels] "Second Activity"
+--> (*)
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=55mm]{activity_001.png}
+\end{center}
+
+% ========================================================================
+\newpage  \subsection{Changing arrow direction}
+
+You can use \texttt{->} for horizontal arrows. It is possible to force arrow's
+direction using the following syntax:
+
+\begin{itemize}
+\item \texttt{-down->} (default arrow)
+\item \texttt{-right->} or \texttt{->}
+\item \texttt{-left->}
+\item \texttt{-up->}
+\end{itemize}
+
+\begin{lstlisting}
+@startuml
+(*) -up-> "First Activity"
+-right-> "Second Activity"
+--> "Third Activity"
+-left-> (*)
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=80mm]{activity_002.png}
+\end{center}
+
+You can shorten the arrow by using only the first character of the direction
+(for example, \texttt{-d-} instead of \texttt{-down-}) or the two first
+characters (\texttt{-do-}).
+
+Please note that you should not abuse this functionnality : \textit{GraphViz}
+gives usually good results without tweaking.
+
+% ========================================================================
+\newpage \subsection{Branches}
+\begin{description}
+\item You can use \texttt{if/then/else} keywords to define branches.
+\end{description}
+
+\begin{lstlisting}
+@startuml
+(*) --> "Initialisation"
+
+if "Some Test" then
+  -->[true] "Some Activity"
+  --> "Another activity"
+  -right-> (*)
+else
+  ->[false] "Something else"
+  -->[Ending process] (*)
+endif
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=70mm]{activity_003.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{More on Branches}
+\begin{description}
+\item By default, a branch is connected to the last defined activity,
+but it is possible to override this and to define a link with the
+\texttt{if} keywords.
+\item It is also possible to nest branches.
+\end{description}
+
+\begin{lstlisting}
+@startuml
+(*) --> if "Some Test" then
+
+  -->[true] "activity 1"
+  
+  if "" then
+    -> "activity 3" as a3
+  else
+    if "Other test" then
+      -left-> "activity 5"
+    else
+      --> "activity 6"
+    endif
+  endif
+  
+else
+
+  ->[false] "activity 2"
+  
+endif
+
+a3 --> if "last test" then
+  --> "activity 7"
+else
+  -> "activity 8"
+endif
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=110mm]{activity_004.png}
+\end{center}
+
+
+
+% ========================================================================
+\newpage \subsection{Synchronization}
+
+You can use "\texttt{=== code ===}" to display synchronization bars.
+
+\begin{lstlisting}
+@startuml
+
+(*) --> ===B1=== 
+--> "Parallel Activity 1"
+--> ===B2===
+
+===B1=== --> "Parallel Activity 2"
+--> ===B2===
+
+--> (*)
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=90mm]{activity_005.png}
+\end{center}
+
+
+
+% ========================================================================
+\newpage \subsection{Long activity description}
+
+When you declare activities, you can span on several lines the description text.
+You can also add \texttt{\textbackslash n } in the description.
+It is also possible to use few html tags like :
+
+\begin{itemize}
+\item \texttt{$<$b$>$}
+\item \texttt{$<$i$>$}
+\item \texttt{$<$font size="nn"$>$} or \texttt{$<$size:nn$>$} to change font
+size
+\item \texttt{$<$font color="\#AAAAAA"$>$} or \texttt{$<$font
+color="colorName"$>$}
+\item \texttt{$<$color:\#AAAAAA$>$} or \texttt{$<$color:colorName$>$}
+\item \texttt{$<$img:file.png$>$} to include an image
+\end{itemize}
+
+You can also give a short code to the activity with the as keyword.
+This code can be used latter in the diagram description.
+
+\begin{lstlisting}
+@startuml
+(*) -left-> "this <size:20>activity</size>
+	is <b>very</b> <color:red>long</color>
+	and defined on several lines
+	that contains many <i>text</i>" as A1
+
+-up-> "Another activity\n on several lines"
+
+A1 --> "Short activity <img:sourceforge.jpg>"
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=75mm]{activity_006.png}
+\end{center}
+
+
+
+% ========================================================================
+\newpage \subsection{Notes}
+
+You can add notes on a activity using the commands:
+\begin{itemize}
+  \item \texttt{note left},
+  \item \texttt{note right},
+  \item \texttt{note top},
+  \item \texttt{note bottom},
+\end{itemize}
+just after the description of the activity you want to note.
+If you want to put a note on the starting point, define the note at the very
+beginning of the diagram description.
+
+You can also have a note on several lines, using the \texttt{end note} keywords.
+
+\begin{lstlisting}
+@startuml
+
+(*) --> "Some Activity"
+note right: This activity has to be defined
+"Some Activity" --> (*)
+note left
+ This note is on
+ several lines
+end note
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=90mm]{activity_007.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Partition}
+
+\begin{description}
+\item You can define a partition using the \texttt{partition} keyword, and
+optionally declare a background color for your partition (using a html color code or name).
+\item When you declare activities, they are automatically put in the last used partition.
+\end{description}
+
+You can close the partition definition using the \texttt{end partition} keyword.
+
+\begin{lstlisting}
+@startuml
+
+partition Conductor
+(*) --> "Climbs on Platform"
+--> === S1 ===
+--> Bows
+end partition
+
+partition Audience #LightSkyBlue
+=== S1 === --> Applauds
+
+partition Conductor
+Bows --> === S2 ===
+--> WavesArmes
+Applauds --> === S2 ===
+end partition
+
+partition Orchestra #CCCCEE
+WavesArmes --> Introduction
+--> "Play music"
+end partition
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=80mm]{activity_008.png}
+\end{center}
+		
+% ========================================================================
+\newpage \subsection{Title the diagram}
+
+The \texttt{title} keywords is used to put a title.
+You can use \texttt{title} and \texttt{end title} keywords for a longer title,
+as in sequence diagrams.
+
+\begin{lstlisting}
+@startuml
+title Simple example\nof title 
+
+(*) --> "First activity"
+--> (*)
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=40mm]{activity_009.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Skinparam}
+
+You can use the \texttt{skinparam} command to change colors and fonts for the
+drawing. You can use this command :
+
+\begin{itemize}
+\item In the diagram definition, like any other commands,
+\item In an included file,
+\item In a configuration file, provided in the command line or the ANT task.
+\end{itemize}
+
+\begin{lstlisting}
+@startuml
+
+skinparam backgroundColor #AAFFFF
+skinparam activity {
+	StartColor red
+	BarColor SaddleBrown 
+	EndColor Silver
+	BackgroundColor Peru
+	BorderColor Peru
+	FontName Impact
+}
+
+(*) --> "Climbs on Platform"
+--> === S1 ===
+--> Bows
+--> === S2 ===
+--> WavesArmes
+--> (*)
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=50mm]{activity_010.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Complete example}
+
+\begin{lstlisting}
+@startuml
+'http://click.sourceforge.net/images/activity-diagram-small.png
+title Servlet Container
+
+(*) --> "ClickServlet.handleRequest()"
+--> "new Page"
+
+if "Page.onSecurityCheck" then
+  ->[true] "Page.onInit()"
+  
+  if "isForward?" then
+   ->[no] "Process controls"
+   
+   if "continue processing?" then
+     -->[yes] ===RENDERING===
+   else
+     -->[no] ===REDIRECT_CHECK===
+   endif
+   
+  else
+   -->[yes] ===RENDERING===
+  endif
+  
+  if "is Post?" then
+    -->[yes] "Page.onPost()"
+    --> "Page.onRender()" as render
+    --> ===REDIRECT_CHECK===
+  else
+    -->[no] "Page.onGet()"
+    --> render
+  endif
+  
+else
+  -->[false] ===REDIRECT_CHECK===
+endif
+
+if "Do redirect?" then
+ ->[yes] "redirect request"
+ --> ==BEFORE_DESTROY===
+else
+ if "Do Forward?" then
+  -left->[yes] "Forward request"
+  --> ==BEFORE_DESTROY===
+ else
+  -right->[no] "Render page template"
+  --> ==BEFORE_DESTROY===
+ endif
+endif
+
+--> "Page.onDestroy()"
+-->(*)
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=130mm]{activity_011.png}
+\end{center}

@@ -1,0 +1,171 @@
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+
+\section{Internationalization}
+\newfontfamily\cjkfont[Script=CJK]{SimSun}
+
+% ========================================================================
+The PlantUML language use \textit{letters} to define actor, usecase and so on. 
+But \textit{letters} are not only A-Z latin characters, it could be \textit{any
+kind of letter from any language}.
+
+\vskip 10mm
+
+
+% @startuml
+% skinparam backgroundColor #EEEBDC
+% actor 使用者
+% participant "頭等艙" as A
+% participant "第二類" as B
+% participant "最後一堂課" as 別的東西
+% 使用者 -> A: 完成這項工作
+% activate A
+% A -> B: 創建請求
+% activate B
+% B -> 別的東西: 創建請求
+% activate 別的東西
+% 別的東西 --> B: 這項工作完成
+% destroy 別的東西
+% B --> A: 請求創建
+% deactivate B
+% A --> 使用者: 做完
+% deactivate A
+% @enduml
+
+{\cjkfont
+$@$startuml
+\par
+skinparam backgroundColor \#EEEBDC
+\par
+actor 使用者
+\par
+participant "頭等艙" as A
+\par
+participant "第二類" as B
+\par
+participant "最後一堂課" as 別的東西
+\vskip 7mm
+使用者 -> A: 完成這項工作
+\par
+activate A
+\par
+A -> B: 創建請求
+\par
+activate B
+\par
+\par
+B -> 別的東西: 創建請求
+\par
+activate 別的東西
+\par
+別的東西 --> B: 這項工作完成
+\par
+destroy 別的東西
+\par
+B --> A: 請求創建
+\par
+deactivate B
+\par
+A --> 使用者: 做完
+\par
+deactivate A
+\par
+$@$enduml
+}
+
+\vskip 7mm
+
+\begin{center}
+\includegraphics[width=70mm]{i18n.png}
+\end{center}
+
+% ========================================================================
+\subsection{Charset} 
+
+The default charset used when reading the text files containing the UML text description is system 
+dependant. 
+Normally, it should just be fine, but in some case, you may want to the use another charset. For 
+example, with the command line: 
+
+
+\begin{lstlisting}
+java -jar plantuml.jar -charset UTF-8 files.txt 
+\end{lstlisting}
+
+Or, with the ant task: 
+
+\begin{lstlisting}
+<!-- Put images in c:/images directory -->
+<target name="main">
+<plantuml dir="./src" charset="UTF-8" />
+</target> 
+\end{lstlisting}
+
+
+Depending of your Java installation, the following charset should be available:
+\texttt{ISO-8859-1}, \texttt{UTF-8}, \texttt{UTF-16BE}, \texttt{UTF-16LE},
+\texttt{UTF-16}.
+
+\subsection{Font Issues} 
+
+When using East Asian Fonts, you may have some issues, because \textit{Graphviz}
+default fonts may not contains some characters. 
+So you may have to force the usage of a system font that contains those characters, by adding the 
+following lines in your diagram descriptions:
+
+% @startuml
+% skinparam defaultFontName MS Mincho
+% 
+% skinparam usecaseBackgroundColor DarkSeaGreen
+% skinparam usecaseArrowColor Olive
+% skinparam actorBorderColor black
+% skinparam usecaseBorderColor DarkSlateGray
+% 
+% 使用者 << 人類 >>
+% "主數據庫" as 數據庫 << 應用程式 >>
+% (草創) << 一桿 >>
+% "主数据燕" as (贏余) << 基本的 >>
+% 
+% 使用者 -> (草創)
+% 使用者 --> (贏余)
+% 
+% 數據庫  --> (贏余)
+% @enduml
+
+\begin{lstlisting}
+skinparam defaultFontName MS Mincho
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=70mm]{i18n_001.png}
+\end{center}
+
+

@@ -1,0 +1,343 @@
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+
+\section{Use Case Diagram}
+
+% ========================================================================
+\subsection{Usecases}
+
+\begin{description}
+\item Use cases are enclosed using between parentheses (because two parentheses
+looks like an oval).
+\item You can also use the \texttt{usecase} keyword to define a usecase.
+\item And you can define an alias, using the \texttt{as} keyword. This alias
+will be used latter, when defining relations.
+\end{description}
+
+\begin{lstlisting}
+@startuml
+
+(First usecase)
+(Another usecase) as (UC2)  
+usecase UC3
+usecase (Last\nusecase) as UC4
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=140mm]{usecase.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Actors}
+
+\begin{description}
+\item Actor are enclosed using between two points.
+\item You can also use the \texttt{actor} keyword to define an actor.
+\item And you can define an alias, using the \texttt{as} keyword. This alias will be used latter, when defining relations.
+\item We will see than actor definitions is optional.
+\end{description}
+
+
+\begin{lstlisting}
+@startuml
+
+:First Actor:
+:Another\nactor: as Men2  
+actor Men3
+actor :Last actor: as Men4
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=100mm]{usecase_001.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Basic example}
+
+\begin{description}
+\item To link actors and use cases, the arrow "\texttt{-->}" is used.
+\item The more dashes "\texttt{-}" in the arrow, the longer the arrow. 
+\item You can add a label on the arrow, by adding a "\texttt{:}" character in
+the arrow definition.
+\item In this example, you see that \textit{User} has not been defined before,
+and is implicitly defined as an actor.
+\end{description}
+
+\begin{lstlisting}
+@startuml
+
+User -> (Start)
+User --> (Use the application) : A small label
+
+:Main Admin: ---> (Use the application) : This is\nyet another\nlabel
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=95mm]{usecase_002.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Extension}
+
+\begin{description}
+\item If one actor/use case extends another one, you can use the symbol
+\texttt{<|--} (which stands for \includegraphics[width=6mm]{img/extends01.png}).
+\item As for smiley, when you turn your head, you will see the symbol
+\includegraphics[width=2mm]{img/extends02.png}
+\end{description}
+  	
+\begin{lstlisting}
+@startuml
+:Main Admin: as Admin
+(Use the application) as (Use)
+
+User <|-- Admin
+(Start) <|-- (Use)
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=85mm]{usecase_003.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Using notes}
+
+You can use the :
+\begin{itemize}
+  \item \texttt{note left of},
+  \item \texttt{note right of}, 
+  \item \texttt{note top of},
+  \item \texttt{note bottom of}
+\end{itemize}
+keywords to define notes related to a single object.
+A note can be also define alone with the note keywords, then
+linked to other objects using the \texttt{..} symbol.
+
+\begin{lstlisting}
+@startuml
+:Main Admin: as Admin
+(Use the application) as (Use)
+
+User -> (Start)
+User --> (Use)
+
+Admin ---> (Use)
+
+note right of Admin : This is an example.
+
+note right of (Use)
+  A note can also
+  be on several lines
+end note
+
+note "This note is connected\nto several objects." as N2
+(Start) .. N2
+N2 .. (Use)
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=130mm]{usecase_004.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Stereotypes}
+
+You can add stereotypes while defining actors and use cases using "\texttt{<<}" and "\texttt{>>}".
+
+\begin{lstlisting}
+@startuml
+User << Human >>
+:Main Database: as MySql << Application >>
+(Start) << One Shot >>
+(Use the application) as (Use) << Main >>
+
+User -> (Start)
+User --> (Use)
+
+MySql --> (Use)
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=120mm]{usecase_005.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Changing arrows direction}
+
+By default, links between classes have two dashes \texttt{--} and are verticaly
+oriented. It is possible to use horizontal link by putting a single dash (or dot) like this:
+\begin{lstlisting}
+@startuml
+:user: --> (Use case 1)
+:user: -> (Use case 2)
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=60mm]{usecase_006.png}
+\end{center}
+
+You can also change directions by reversing the link:
+\begin{lstlisting}
+@startuml
+(Use case 1) <.. :user:
+(Use case 2) <- :user:
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=60mm]{usecase_007.png}
+\end{center}
+
+It is also possible to change arrow direction by adding \texttt{left},
+\texttt{right}, \texttt{up} or \texttt{down} keywords inside the arrow:
+\begin{lstlisting}
+@startuml
+:user: -left-> (dummyLeft) 
+:user: -right-> (dummyRight) 
+:user: -up-> (dummyUp)
+:user: -down-> (dummyDown)
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=100mm]{usecase_008.png}
+\end{center}
+
+You can shorten the arrow by using only the first character of the direction
+(for example, \texttt{-d-} instead of \texttt{-down-}) or the two first
+characters (\texttt{-do-}).
+
+Please note that you should not abuse this functionnality : \textit{GraphViz}
+gives usually good results without tweaking.
+
+% ========================================================================
+\subsection{Title the diagram}
+
+\begin{description}
+\item The \texttt{title} keywords is used to put a title.
+\item You can use \texttt{title} and \texttt{end title} keywords for a longer
+title, as in sequence diagrams.
+\end{description}
+
+\begin{lstlisting}
+@startuml
+title Simple <b>Usecase</b>\nwith one actor
+
+usecase (Use the application) as (Use)
+User -> (Use)
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=8cm]{usecase_009.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Left to right direction}
+
+The general default behaviour when building diagram is top to bottom.
+
+
+\begin{lstlisting}
+@startuml
+'default
+top to bottom direction
+user1 --> (Usecase 1)
+user2 --> (Usecase 2)
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=70mm]{usecase_010.png}
+\end{center}
+
+You may change to left to right using the \texttt{left to right direction} command. The result is often better with this direction.
+\begin{lstlisting}
+@startuml
+
+left to right direction
+user1 --> (Usecase 1)
+user2 --> (Usecase 2)
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=70mm]{usecase_011.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Skinparam}
+
+You can use the \texttt{skinparam} command to change colors and fonts for the drawing.
+You can use this command :
+
+\begin{itemize}
+\item In the diagram definition, like any other commands,
+\item In an included file,
+\item In a configuration file, provided in the command line or the ANT task.
+\end{itemize}
+
+
+\begin{lstlisting}
+@startuml
+skinparam usecase {
+	BackgroundColor DarkSeaGreen
+	BorderColor DarkSlateGray
+
+	BackgroundColor<< Main >> YellowGreen
+	BorderColor<< Main >> YellowGreen
+	
+	ArrowColor Olive
+	ActorBorderColor black
+	ActorFontName Courier
+
+	ActorBackgroundColor<< Human >> Gold
+}
+
+User << Human >>
+:Main Database: as MySql << Application >>
+(Start) << One Shot >>
+(Use the application) as (Use) << Main >>
+
+User -> (Start)
+User --> (Use)
+
+MySql --> (Use)
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=110mm]{usecase_012.png}
+\end{center}

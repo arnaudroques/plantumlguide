@@ -1,0 +1,122 @@
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+ 
+\documentclass{article}
+
+\usepackage{courier}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{fontspec} 
+\usepackage{lastpage}
+\usepackage{ifthen}
+\usepackage{inputenc}
+\usepackage[
+    paper=a4paper,
+    tmargin=2.5cm,
+    bmargin=2.5cm,
+    lmargin=2.5cm,
+    rmargin=2.5cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	pdfauthor={Arnaud Roques},
+	pdfsubject={Drawing UML with PlantUML},
+	pdftitle={PlantUML Language Reference Guide},
+	pdfkeywords={UML}
+}
+
+\rfoot{\thepage\ of \pageref{LastPage}}
+\lfoot{\includegraphics[width=7mm]{img/Logo_PlantUML.eps} PlantUML :
+\textit{Language Reference Guide, January 23, 2011
+(Version 6085)}}
+\cfoot{}
+
+\lstset{
+  basicstyle=\footnotesize\ttfamily
+}
+\author{Arnaud Roques}
+\title{Drawing UML with PlantUML}
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+		\Huge{Drawing UML with PlantUML}
+		\vskip 5mm
+		\includegraphics[width=30mm]{img/Logo_PlantUML.eps}
+		\vskip 5mm
+		\Large{Language Reference Guide}
+		\vskip 1mm
+		\large{(Version 6085)}
+	\end{center}
+
+	\vskip 2cm
+	\textbf{PlantUML} is an Open Source project that allows to quickly write:
+	\begin{itemize}
+	\item Sequence diagram,
+	\item Usecase diagram,
+	\item Class diagram,
+	\item Activity diagram,
+	\item Component diagram,
+	\item State diagram,
+	\item Object diagram.
+	\end{itemize}
+	Diagrams are defined using a simple and intuitive language.
+	
+
+\end{titlepage}
+
+%\maketitle
+
+\include{sequence}
+\include{usecase}
+\include{class}
+\include{activity}
+\include{component}
+\include{state}
+\include{object}
+\include{common}
+\include{skinparam}
+\include{preprocessing}
+%You may comment out the i18n line if you have issues with CJK fonts
+\include{i18n}
+\include{colornames}
+
+\tableofcontents
+
+\end{document}

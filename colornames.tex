@@ -1,0 +1,192 @@
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+
+\section{Color Names}
+
+% ========================================================================
+%\subsection{Usage}
+
+\vskip 11mm
+Here is the list of colors recognized by PlantUML. Note that color names are
+case insensitive.
+\vskip 11mm
+
+\newcommand{\colorname}[4]
+{\cellcolor[HTML]{#4} & #2 \ifthenelse{\equal{#3}{c}}{\\ \hline }{ & }}
+
+
+\begin{tabular}{|p{10mm} l|p{10mm} l|p{10mm} l|} \hline
+\colorname{00}{AliceBlue}{a}{F0F8FF}
+\colorname{00}{GhostWhite}{b}{F8F8FF}
+\colorname{00}{NavajoWhite}{c}{FFDEAD}
+\colorname{01}{AntiqueWhite}{a}{FAEBD7}
+\colorname{01}{GoldenRod}{b}{DAA520}
+\colorname{01}{Navy}{c}{000080}
+\colorname{02}{Aquamarine}{a}{7FFFD4}
+\colorname{02}{Gold}{b}{FFD700}
+\colorname{02}{OldLace}{c}{FDF5E6}
+\colorname{03}{Aqua}{a}{00FFFF}
+\colorname{03}{Gray}{b}{808080}
+\colorname{03}{OliveDrab}{c}{6B8E23}
+\colorname{04}{Azure}{a}{F0FFFF}
+\colorname{04}{GreenYellow}{b}{ADFF2F}
+\colorname{04}{Olive}{c}{808000}
+\colorname{05}{Beige}{a}{F5F5DC}
+\colorname{05}{Green}{b}{008000}
+\colorname{05}{OrangeRed}{c}{FF4500}
+\colorname{06}{Bisque}{a}{FFE4C4}
+\colorname{06}{HoneyDew}{b}{F0FFF0}
+\colorname{06}{Orange}{c}{FFA500}
+\colorname{07}{Black}{a}{000000}
+\colorname{07}{HotPink}{b}{FF69B4}
+\colorname{07}{Orchid}{c}{DA70D6}
+\colorname{08}{BlanchedAlmond}{a}{FFEBCD}
+\colorname{08}{IndianRed}{b}{CD5C5C}
+\colorname{08}{PaleGoldenRod}{c}{EEE8AA}
+\colorname{09}{BlueViolet}{a}{8A2BE2}
+\colorname{09}{Indigo}{b}{4B0082}
+\colorname{09}{PaleGreen}{c}{98FB98}
+\colorname{10}{Blue}{a}{0000FF}
+\colorname{10}{Ivory}{b}{FFFFF0}
+\colorname{10}{PaleTurquoise}{c}{AFEEEE}
+\colorname{11}{Brown}{a}{A52A2A}
+\colorname{11}{Khaki}{b}{F0E68C}
+\colorname{11}{PaleVioletRed}{c}{D87093}
+\colorname{12}{BurlyWood}{a}{DEB887}
+\colorname{12}{LavenderBlush}{b}{FFF0F5}
+\colorname{12}{PapayaWhip}{c}{FFEFD5}
+\colorname{13}{CadetBlue}{a}{5F9EA0}
+\colorname{13}{Lavender}{b}{E6E6FA}
+\colorname{13}{PeachPuff}{c}{FFDAB9}
+\colorname{14}{Chartreuse}{a}{7FFF00}
+\colorname{14}{LawnGreen}{b}{7CFC00}
+\colorname{14}{Peru}{c}{CD853F}
+\colorname{15}{Chocolate}{a}{D2691E}
+\colorname{15}{LemonChiffon}{b}{FFFACD}
+\colorname{15}{Pink}{c}{FFC0CB}
+\colorname{16}{Coral}{a}{FF7F50}
+\colorname{16}{LightBlue}{b}{ADD8E6}
+\colorname{16}{Plum}{c}{DDA0DD}
+\colorname{17}{CornflowerBlue}{a}{6495ED}
+\colorname{17}{LightCoral}{b}{F08080}
+\colorname{17}{PowderBlue}{c}{B0E0E6}
+\colorname{18}{Cornsilk}{a}{FFF8DC}
+\colorname{18}{LightCyan}{b}{E0FFFF}
+\colorname{18}{Purple}{c}{800080}
+\colorname{19}{Crimson}{a}{DC143C}
+\colorname{19}{LightGoldenRodYellow}{b}{FAFAD2}
+\colorname{19}{Red}{c}{FF0000}
+\colorname{20}{Cyan}{a}{00FFFF}
+\colorname{20}{LightGreen}{b}{90EE90}
+\colorname{20}{RosyBrown}{c}{BC8F8F}
+\colorname{21}{DarkBlue}{a}{00008B}
+\colorname{21}{LightGrey}{b}{D3D3D3}
+\colorname{21}{RoyalBlue}{c}{4169E1}
+\colorname{22}{DarkCyan}{a}{008B8B}
+\colorname{22}{LightPink}{b}{FFB6C1}
+\colorname{22}{SaddleBrown}{c}{8B4513}
+\colorname{23}{DarkGoldenRod}{a}{B8860B}
+\colorname{23}{LightSalmon}{b}{FFA07A}
+\colorname{23}{Salmon}{c}{FA8072}
+\colorname{24}{DarkGray}{a}{A9A9A9}
+\colorname{24}{LightSeaGreen}{b}{20B2AA}
+\colorname{24}{SandyBrown}{c}{F4A460}
+\colorname{25}{DarkGreen}{a}{006400}
+\colorname{25}{LightSkyBlue}{b}{87CEFA}
+\colorname{25}{SeaGreen}{c}{2E8B57}
+\colorname{26}{DarkKhaki}{a}{BDB76B}
+\colorname{26}{LightSlateGray}{b}{778899}
+\colorname{26}{SeaShell}{c}{FFF5EE}
+\colorname{27}{DarkMagenta}{a}{8B008B}
+\colorname{27}{LightSteelBlue}{b}{B0C4DE}
+\colorname{27}{Sienna}{c}{A0522D}
+\colorname{28}{DarkOliveGreen}{a}{556B2F}
+\colorname{28}{LightYellow}{b}{FFFFE0}
+\colorname{28}{Silver}{c}{C0C0C0}
+\colorname{29}{DarkOrchid}{a}{9932CC}
+\colorname{29}{LimeGreen}{b}{32CD32}
+\colorname{29}{SkyBlue}{c}{87CEEB}
+\colorname{30}{DarkRed}{a}{8B0000}
+\colorname{30}{Lime}{b}{00FF00}
+\colorname{30}{SlateBlue}{c}{6A5ACD}
+\colorname{31}{DarkSalmon}{a}{E9967A}
+\colorname{31}{Linen}{b}{FAF0E6}
+\colorname{31}{SlateGray}{c}{708090}
+\colorname{32}{DarkSeaGreen}{a}{8FBC8F}
+\colorname{32}{Magenta}{b}{FF00FF}
+\colorname{32}{Snow}{c}{FFFAFA}
+\colorname{33}{DarkSlateBlue}{a}{483D8B}
+\colorname{33}{Maroon}{b}{800000}
+\colorname{33}{SpringGreen}{c}{00FF7F}
+\colorname{34}{DarkSlateGray}{a}{2F4F4F}
+\colorname{34}{MediumAquaMarine}{b}{66CDAA}
+\colorname{34}{SteelBlue}{c}{4682B4}
+\colorname{35}{DarkTurquoise}{a}{00CED1}
+\colorname{35}{MediumBlue}{b}{0000CD}
+\colorname{35}{Tan}{c}{D2B48C}
+\colorname{36}{DarkViolet}{a}{9400D3}
+\colorname{36}{MediumOrchid}{b}{BA55D3}
+\colorname{36}{Teal}{c}{008080}
+\colorname{37}{Darkorange}{a}{FF8C00}
+\colorname{37}{MediumPurple}{b}{9370D8}
+\colorname{37}{Thistle}{c}{D8BFD8}
+\colorname{38}{DeepPink}{a}{FF1493}
+\colorname{38}{MediumSeaGreen}{b}{3CB371}
+\colorname{38}{Tomato}{c}{FF6347}
+\colorname{39}{DeepSkyBlue}{a}{00BFFF}
+\colorname{39}{MediumSlateBlue}{b}{7B68EE}
+\colorname{39}{Turquoise}{c}{40E0D0}
+\colorname{40}{DimGray}{a}{696969}
+\colorname{40}{MediumSpringGreen}{b}{00FA9A}
+\colorname{40}{Violet}{c}{EE82EE}
+\colorname{41}{DodgerBlue}{a}{1E90FF}
+\colorname{41}{MediumTurquoise}{b}{48D1CC}
+\colorname{41}{Wheat}{c}{F5DEB3}
+\colorname{42}{FireBrick}{a}{B22222}
+\colorname{42}{MediumVioletRed}{b}{C71585}
+\colorname{42}{WhiteSmoke}{c}{F5F5F5}
+\colorname{43}{FloralWhite}{a}{FFFAF0}
+\colorname{43}{MidnightBlue}{b}{191970}
+\colorname{43}{White}{c}{FFFFFF}
+\colorname{44}{ForestGreen}{a}{228B22}
+\colorname{44}{MintCream}{b}{F5FFFA}
+\colorname{44}{YellowGreen}{c}{9ACD32}
+\colorname{45}{Fuchsia}{a}{FF00FF}
+\colorname{45}{MistyRose}{b}{FFE4E1}
+\colorname{45}{Yellow}{c}{FFFF00}
+\colorname{46}{Gainsboro}{a}{DCDCDC}
+\colorname{46}{Moccasin}{b}{FFE4B5}
+
+& & \hline
+\end{tabular}
+
+
+

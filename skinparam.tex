@@ -1,0 +1,636 @@
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+
+\section{Changing fonts and colors}
+
+% ========================================================================
+\subsection{Usage}
+
+You can change colors and font of the drawing using the \texttt{skinparam} command. 
+Example: 
+
+\begin{lstlisting}
+skinparam backgroundColor yellow 
+\end{lstlisting}
+
+
+You can use this command : 
+
+\begin{itemize}
+\item In the diagram definition, like any other commands, 
+\item In an included file (see \textit{Preprocessing}), 
+\item In a configuration file, provided in the command line or the ANT task.
+\end{itemize}
+
+% ========================================================================
+\subsection{Nested}
+To avoid repetition, it is possible to nest definition. So the following definition :
+
+\begin{lstlisting}
+skinparam xxxxParam1 value1
+skinparam xxxxParam2 value2
+skinparam xxxxParam3 value3
+skinparam xxxxParam4 value4
+\end{lstlisting}
+		
+
+is strictly equivalent to:
+
+\begin{lstlisting}
+skinparam xxxx {
+  Param1 value1
+  Param2 value2
+  Param3 value3
+  Param4 value4
+}
+\end{lstlisting}
+		
+
+
+
+ 
+% ========================================================================
+\newpage \subsection{Color}
+
+You can use either standard color name or RGB code.
+\vskip 12mm
+
+\newcommand{\firstCell}{\texttt}
+ 
+\begin{center}
+\begin{tabular}{|l|c|c|l|} \hline
+
+\textbf{Parameter name} & \textbf{Default} & \textbf{Color} & \textbf{Comment}
+\\
+& \textbf{Value} & &
+
+\\ \hline
+
+\firstCell{backgroundColor} & \footnotesize{white}
+& & \footnotesize{Background of the page}
+
+\\ \hline
+
+\firstCell{activityArrowColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Color of arrows in activity diagrams}
+
+\\ \hline
+
+\firstCell{activityBackgroundColor} & \footnotesize{\#FEFECE} &
+\cellcolor[HTML]{FEFECE} &
+\footnotesize{Background of activities}
+
+\\ \hline
+ 
+\firstCell{activityBorderColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Color of activity borders}
+
+\\ \hline
+ 
+\firstCell{activityStartColor} & \footnotesize{black} &
+\cellcolor[HTML]{000000} &
+\footnotesize{Starting circle in activity diagrams}
+ 
+\\ \hline
+ 
+\firstCell{activityEndColor} & \footnotesize{black} &
+\cellcolor[HTML]{000000} &
+\footnotesize{Ending circle in activity diagrams}
+
+\\ \hline
+ 
+\firstCell{activityBarColor} & \footnotesize{black} &
+\cellcolor[HTML]{000000} &
+\footnotesize{Synchronization bar in activity diagrams}
+ 
+\\ \hline
+ 
+\firstCell{usecaseArrowColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Color of arrows in usecase diagrams}
+
+\\ \hline
+ 
+\firstCell{usecaseActorBackgroundColor} & \footnotesize{\#FEFECE} &
+\cellcolor[HTML]{FEFECE} &
+\footnotesize{Head's color of actor in usecase diagrams}
+ 
+\\ \hline
+ 
+\firstCell{usecaseActorBorderColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Color of actor borders in usecase diagrams}
+
+\\ \hline
+ 
+\firstCell{usecaseBackgroundColor} & \footnotesize{\#FEFECE} &
+\cellcolor[HTML]{FEFECE} &
+\footnotesize{Background of usecases}
+
+\\ \hline
+ 
+\firstCell{usecaseBorderColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Color of usecase borders in usecase diagrams}
+ 
+\\ \hline
+ 
+\firstCell{classArrowColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Color of arrows in class diagrams}
+
+\\ \hline
+ 
+\firstCell{classBackgroundColor} & \footnotesize{\#FEFECE} &
+\cellcolor[HTML]{FEFECE} &
+\footnotesize{Background of classes/interface/enum in class diagrams}
+ 
+\\ \hline
+ 
+\firstCell{classBorderColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Borders of classes/interface/enum in class diagrams}
+ 
+\\ \hline
+ 
+\firstCell{packageBackgroundColor} & \footnotesize{\#FEFECE} &
+\cellcolor[HTML]{FEFECE} &
+\footnotesize{Background of packages in class diagrams}
+ 
+\\ \hline
+ 
+\firstCell{packageBorderColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Borders of packages in class diagrams}
+
+\\ \hline
+ 
+\firstCell{stereotypeCBackgroundColor} & \footnotesize{\#ADD1B2} &
+\cellcolor[HTML]{ADD1B2} &
+\footnotesize{Background of class spots in class diagrams}
+
+\\ \hline
+ 
+\firstCell{stereotypeABackgroundColor} & \footnotesize{\#A9DCDF} &
+\cellcolor[HTML]{A9DCDF} &
+\footnotesize{Background of abstract class spots in class diagrams}
+ 
+\\ \hline
+ 
+\firstCell{stereotypeIBackgroundColor} & \footnotesize{\#B4A7E5} &
+\cellcolor[HTML]{B4A7E5} &
+\footnotesize{Background of interface spots in class diagrams}
+ 
+\\ \hline
+ 
+\firstCell{stereotypeEBackgroundColor} & \footnotesize{\#EB937F} &
+\cellcolor[HTML]{EB937F} &
+\footnotesize{Background of enum spots in class diagrams}
+ 
+\\ \hline
+ 
+\firstCell{componentArrowColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Color of arrows in component diagrams}
+ 
+\\ \hline
+ 
+\firstCell{componentBackgroundColor} & \footnotesize{\#FEFECE} &
+\cellcolor[HTML]{FEFECE} &
+\footnotesize{Background of components}
+ 
+\\ \hline
+ 
+\firstCell{componentBorderColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Borders of components}
+ 
+\\ \hline
+ 
+\firstCell{componentInterfaceBackgroundColor} & \footnotesize{\#FEFECE} &
+\cellcolor[HTML]{FEFECE} &
+\footnotesize{Background of interface in component diagrams}
+ 
+\\ \hline
+ 
+\firstCell{componentInterfaceBorderColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Border of interface in component diagrams}
+ 
+\\ \hline
+ 
+\firstCell{noteBackgroundColor} & \footnotesize{\#FBFB77} &
+\cellcolor[HTML]{FBFB77} &
+\footnotesize{Background of notes}
+ 
+\\ \hline
+ 
+\firstCell{noteBorderColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Border of notes}
+ 
+\\ \hline
+ 
+\firstCell{stateBackgroundColor} & \footnotesize{\#FEFECE} &
+\cellcolor[HTML]{FEFECE} &
+\footnotesize{Background of states in state diagrams}
+ 
+\\ \hline
+ 
+\firstCell{stateBorderColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Border of states in state diagrams} 
+
+\\ \hline
+ 
+\firstCell{stateArrowColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Colors of arrows in state diagrams}
+ 
+\\ \hline
+ 
+\firstCell{stateStartColor} & \footnotesize{black} &
+\cellcolor[HTML]{000000} &
+\footnotesize{Starting circle in state diagrams}
+ 
+\\ \hline
+ 
+\firstCell{stateEndColor} & \footnotesize{black} &
+\cellcolor[HTML]{000000} &
+\footnotesize{Ending circle in state diagrams}
+
+\\ \hline
+ 
+\firstCell{sequenceArrowColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Color of arrows in sequence diagrams}
+ 
+\\ \hline
+ 
+\firstCell{sequenceActorBackgroundColor} & \footnotesize{\#FEFECE} &
+\cellcolor[HTML]{FEFECE} &
+\footnotesize{Head's color of actor in sequence diagrams}
+ 
+\\ \hline
+ 
+\firstCell{sequenceActorBorderColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Border of actor in sequence diagrams}
+
+\\ \hline
+ 
+\firstCell{sequenceGroupBackgroundColor} & \footnotesize{\#EEEEEE} &
+\cellcolor[HTML]{EEEEEE} &
+\footnotesize{Header color of alt/opt/loop in sequence diagrams}
+ 
+\\ \hline
+ 
+\firstCell{sequenceLifeLineBackgroundColor} & \footnotesize{white} &
+\cellcolor[HTML]{FFFFFF} &
+\footnotesize{Background of life line in sequence diagrams}
+ 
+\\ \hline
+ 
+\firstCell{sequenceLifeLineBorderColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Border of life line in sequence diagrams}
+ 
+\\ \hline
+ 
+\firstCell{sequenceParticipantBackgroundColor} & \footnotesize{\#FEFECE} &
+\cellcolor[HTML]{FEFECE} &
+\footnotesize{Background of participant in sequence diagrams}
+ 
+\\ \hline
+ 
+\firstCell{sequenceParticipantBorderColor} & \footnotesize{\#A80036} &
+\cellcolor[HTML]{A80036} &
+\footnotesize{Border of participant in sequence diagrams}
+ 
+\\ \hline
+ 
+\end{tabular}
+\end{center}
+ 
+% ========================================================================
+\newpage \subsection{Font color, name and size} 
+
+You can change the font for the drawing using \texttt{xxxFontColor},
+\texttt{xxxFontSize} and \texttt{xxxFontName} parameters. 
+
+Example: 
+
+\begin{lstlisting}
+skinparam classFontColor red
+skinparam classFontSize 10
+skinparam classFontName Aapex 
+\end{lstlisting}
+
+
+You can also change the default font for all fonts using
+\texttt{skinparam defaultFontName}.
+
+Example: 
+
+\begin{lstlisting}
+skinparam defaultFontName Aapex
+\end{lstlisting}
+
+
+Please note the fontname is highly system dependant, so do not over use it, if you look for 
+portability. 
+
+\newcommand{\firstCellB}{\texttt}
+
+\begin{center}
+\begin{longtable}{|l|c|l|} \hline
+\textbf{Parameter} & \textbf{Default} & \textbf{Comment}
+\\
+\textbf{Name} & \textbf{Value} &
+
+\\ \hline
+
+\firstCellB{activityFontColor} & black &
+\multirow{4}{*}{Used for activity box} \\*
+\firstCellB{activityFontSize}  & 14 &  \\*
+\firstCellB{activityFontStyle} & plain & \\*
+\firstCellB{activityFontName} & & \\
+
+\hline
+\firstCellB{activityArrowFontColor} & black &
+\multirow{4}{*}{Used for text on arrows in activity diagrams} \\*
+\firstCellB{activityArrowFontSize}  & 13 &  \\*
+\firstCellB{activityArrowFontStyle}  & plain & \\*
+\firstCellB{activityArrowFontName}  & & \\
+
+\hline
+\firstCellB{circledCharacterFontColor} & black &
+\multirow{5}{*}{Used for text in circle for class, enum and others} \\*
+\firstCellB{circledCharacterFontSize}  & 17 &  \\*
+\firstCellB{circledCharacterFontStyle }  & bold & \\*
+\firstCellB{circledCharacterFontName}  & Courier & \\*
+\firstCellB{circledCharacterRadius}  & 11 & \\
+
+\hline
+\firstCellB{classArrowFontColor} & black &
+\multirow{4}{*}{Used for text on arrows in class diagrams} \\*
+\firstCellB{classArrowFontSize}  & 10 &  \\*
+\firstCellB{classArrowFontStyle}  & plain &  \\*
+\firstCellB{classArrowFontName}  & & \\
+
+\hline
+\firstCellB{classAttributeFontColor}  & black &
+\multirow{4}{*}{Class attributes and methods} \\*
+\firstCellB{classAttributeFontSize}  & 10 &  \\*
+\firstCellB{classAttributeIconSize}  & 10 &  \\*
+\firstCellB{classAttributeFontStyle}  & plain &  \\*
+\firstCellB{classAttributeFontName}  & & \\
+
+\hline
+\firstCellB{classFontColor}  & black &
+\multirow{4}{*}{Used for classes name} \\*
+\firstCellB{classFontSize}  & 12 &  \\*
+\firstCellB{classFontStyle}  & plain &  \\*
+\firstCellB{classFontName}  & & \\
+
+\hline
+\firstCellB{classStereotypeFontColor}  & black &
+\multirow{4}{*}{Used for stereotype in classes} \\*
+\firstCellB{classStereotypeFontSize}  & 12 &  \\*
+\firstCellB{classStereotypeFontStyle}  & italic &  \\*
+\firstCellB{classStereotypeFontName}  & & \\
+
+\hline
+\firstCellB{componentFontColor}  & black &
+\multirow{4}{*}{Used for components name} \\*
+\firstCellB{componentFontSize}  & 14 &  \\*
+\firstCellB{componentFontStyle}  & plain &  \\*
+\firstCellB{componentFontName}  & & \\
+
+\hline
+\firstCellB{componentStereotypeFontColor}  & black &
+\multirow{4}{*}{Used for stereotype in components} \\*
+\firstCellB{componentStereotypeFontSize}  & 14 &  \\*
+\firstCellB{componentStereotypeFontStyle}  & italic &  \\*
+\firstCellB{componentStereotypeFontName}  & & \\
+
+\hline
+\firstCellB{componentArrowFontColor}  & black &
+\multirow{4}{*}{Used for text on arrows in component diagrams} \\*
+\firstCellB{componentArrowFontSize}  & 13 &  \\*
+\firstCellB{componentArrowFontStyle}  & plain &  \\*
+\firstCellB{componentArrowFontName}  & & \\
+
+\hline
+\firstCellB{noteFontColor}  & black &
+\multirow{4}{*}{Used for notes in all diagrams but sequence diagrams} \\*
+\firstCellB{noteFontSize}  & 13 &  \\*
+\firstCellB{noteFontStyle}  & plain &  \\*
+\firstCellB{noteFontName}  & & \\
+
+\hline
+\firstCellB{packageFontColor}  & black &
+\multirow{4}{*}{Used for package and partition names} \\*
+\firstCellB{packageFontSize}  & 14 &  \\*
+\firstCellB{packageFontStyle}  & plain &  \\*
+\firstCellB{packageFontName}  & & \\
+
+\hline
+\firstCellB{sequenceActorFontColor}  & black &
+\multirow{4}{*}{Used for actor in sequence diagrams} \\*
+\firstCellB{sequenceActorFontSize}   & 13 &  \\*
+\firstCellB{sequenceActorFontStyle}   & plain &  \\*
+\firstCellB{sequenceActorFontName}   & & \\
+
+\hline
+\firstCellB{sequenceDividerFontColor}  & black &
+\multirow{4}{*}{Used for text on dividers in sequence diagrams} \\*
+\firstCellB{sequenceDividerFontSize}   & 13 &  \\*
+\firstCellB{sequenceDividerFontStyle}   & bold &  \\*
+\firstCellB{sequenceDividerFontName}   & & \\
+
+\hline
+\firstCellB{sequenceArrowFontColor}   & black &
+\multirow{4}{*}{Used for text on arrows in sequence diagrams} \\*
+\firstCellB{sequenceArrowFontSize}   & 13 &  \\*
+\firstCellB{sequenceArrowFontStyle}   & plain &  \\*
+\firstCellB{sequenceArrowFontName}   & & \\
+
+\hline
+\firstCellB{sequenceGroupingFontColor}   & black &
+\multirow{4}{*}{Used for text for "else" in sequence diagrams} \\*
+\firstCellB{sequenceGroupingFontSize}   & 11 &  \\*
+\firstCellB{sequenceGroupingFontStyle}   & plain &  \\*
+\firstCellB{sequenceGroupingFontName}   & & \\
+
+\hline
+\firstCellB{sequenceGroupingHeaderFontColor}   & black &
+\multirow{4}{*}{Used for text for "alt/opt/loop" headers in sequence diagrams} \\*
+\firstCellB{sequenceGroupingHeaderFontSize}   & 13 &  \\*
+\firstCellB{sequenceGroupingHeaderFontStyle}   & plain &  \\*
+\firstCellB{sequenceGroupingHeaderFontName}   & & \\
+
+\hline
+\firstCellB{sequenceParticipantFontColor}   & black &
+\multirow{4}{*}{Used for text on participant in sequence diagrams} \\*
+\firstCellB{sequenceParticipantFontSize}   & 13 &  \\*
+\firstCellB{sequenceParticipantFontStyle}   & plain &  \\*
+\firstCellB{sequenceParticipantFontName}   & & \\
+
+\hline
+\firstCellB{sequenceTitleFontColor}   & black &
+\multirow{4}{*}{Used for titles in sequence diagrams} \\*
+\firstCellB{sequenceTitleFontSize}   & 13 &  \\*
+\firstCellB{sequenceTitleFontStyle}   & plain &  \\*
+\firstCellB{sequenceTitleFontName}   & & \\
+
+\hline
+\firstCellB{titleFontColor}   & black &
+\multirow{4}{*}{Used for titles in all diagrams but sequence diagrams} \\* 
+\firstCellB{titleFontSize}   & 18 &  \\*
+\firstCellB{titleFontStyle}   & plain &  \\*
+\firstCellB{titleFontName}   & & \\
+
+\hline
+\firstCellB{stateFontColor}   & black &
+\multirow{4}{*}{Used for states in state diagrams} \\*
+\firstCellB{stateFontSize}   & 14 &  \\*
+\firstCellB{stateFontStyle}   & plain &  \\*
+\firstCellB{stateFontName}   & & \\
+
+\hline
+\firstCellB{stateArrowFontColor}   & black &
+\multirow{4}{*}{Used for text on arrows in state diagrams} \\*
+\firstCellB{stateArrowFontSize}   & 13 &  \\*
+\firstCellB{stateArrowFontStyle}   & plain &  \\*
+\firstCellB{stateArrowFontName}   & & \\
+
+\hline
+\firstCellB{stateAttributeFontColor}   & black &
+\multirow{4}{*}{Used for states description in state diagrams} \\*
+\firstCellB{stateAttributeFontSize}   & 12 &  \\*
+\firstCellB{stateAttributeFontStyle}   & plain &  \\*
+\firstCellB{stateAttributeFontName}   & & \\
+
+\hline
+\firstCellB{usecaseFontColor}   & black &
+\multirow{4}{*}{Used for usecase labels in usecase diagrams} \\*
+\firstCellB{usecaseFontSize}   & 14 &  \\*
+\firstCellB{usecaseFontStyle}   & plain &  \\*
+\firstCellB{usecaseFontName}   & & \\
+
+\hline
+\firstCellB{usecaseStereotypeFontColor}   & black &
+\multirow{4}{*}{Used for stereotype in usecase} \\*
+\firstCellB{usecaseStereotypeFontSize}   & 14 &  \\*
+\firstCellB{usecaseStereotypeFontStyle}   & italic &  \\*
+\firstCellB{usecaseStereotypeFontName}   & & \\
+
+\hline
+\firstCellB{usecaseActorFontColor}   & black &
+\multirow{4}{*}{Used for actor labels in usecase diagrams} \\*
+\firstCellB{usecaseActorFontSize}   & 14 &  \\*
+\firstCellB{usecaseActorFontStyle}   & plain &  \\*
+\firstCellB{usecaseActorFontName}   & & \\
+
+\hline
+\firstCellB{usecaseActorStereotypeFontColor}   & black &
+\multirow{4}{*}{Used for stereotype for actor} \\*
+\firstCellB{usecaseActorStereotypeFontSize}   & 14 &  \\*
+\firstCellB{usecaseActorStereotypeFontStyle}   & italic &  \\*
+\firstCellB{usecaseActorStereotypeFontName}   & & \\
+
+\hline
+\firstCellB{usecaseArrowFontColor}   & black &
+\multirow{4}{*}{Used for text on arrows in usecase diagrams} \\*
+\firstCellB{usecaseArrowFontSize}   & 13 &  \\*
+\firstCellB{usecaseArrowFontStyle}   & plain &  \\*
+\firstCellB{usecaseArrowFontName}   & & \\
+
+\hline
+\firstCellB{footerFontColor}   & black &
+\multirow{4}{*}{Used for footer} \\*
+\firstCellB{footerFontSize}   & 10 &  \\*
+\firstCellB{footerFontStyle}   & plain &  \\*
+\firstCellB{footerFontName}   & & \\
+
+\hline
+\firstCellB{headerFontColor}   & black &
+\multirow{4}{*}{Used for header} \\*
+\firstCellB{headerFontSize}   & 10 &  \\*
+\firstCellB{headerFontStyle}   & plain &  \\*
+\firstCellB{headerFontName}   & & \\
+
+\hline
+\end{longtable}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Black and White} 
+
+You can force the use of a black&white output using the
+\texttt{skinparam monochrome true} command.
+ 
+\begin{lstlisting}
+@startuml
+skinparam monochrome true
+
+actor User
+participant "First Class" as A
+participant "Second Class" as B
+participant "Last Class" as C
+
+User -> A: DoWork
+activate A
+
+A -> B: Create Request
+activate B
+
+B -> C: DoWork
+activate C
+C --> B: WorkDone
+destroy C
+
+B --> A: Request Created
+deactivate B
+
+A --> User: Done
+deactivate A
+
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=100mm]{skinparam.png}
+\end{center}
+ 

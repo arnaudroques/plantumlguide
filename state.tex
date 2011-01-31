@@ -1,0 +1,255 @@
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+
+\section{State Diagram}
+
+% ========================================================================
+\subsection{Simple State}
+
+\begin{description}
+\item You can use \texttt{[*]} for the starting point and ending point of the
+state diagram.
+\item Use \texttt{-->} for arrows.
+\end{description}
+
+\begin{lstlisting}
+@startuml
+[*] --> State1
+State1 --> [*]
+State1 : this is a string
+State1 : this is another string
+
+State1 -> State2
+State2 --> [*]
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=60mm]{state.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Composite state}
+
+A state can also be composite. You have to define it using the \texttt{state}
+keywords and brackets.
+
+
+\begin{lstlisting}
+@startuml
+
+[*] --> NotShooting
+
+state NotShooting {
+  [*] --> Idle
+  Idle --> Configuring : EvConfig
+  Configuring --> Idle : EvConfig
+}
+
+state Configuring {
+  [*] --> NewValueSelection
+  NewValueSelection --> NewValuePreview : EvNewValue
+  NewValuePreview --> NewValueSelection : EvNewValueRejected
+  NewValuePreview --> NewValueSelection : EvNewValueSaved
+  
+  state NewValuePreview {
+     State1 -> State2
+  }
+  
+}
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=80mm]{state_001.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Long name}
+
+You can also use the \texttt{state} keyword to use long description for states.
+
+\begin{lstlisting}
+@startuml
+
+[*] -> State1
+State1 --> State2 : Succeeded
+State1 --> [*] : Aborted
+State2 --> State3 : Succeeded
+State2 --> [*] : Aborted
+state State3 {
+  state "Accumulate Enough Data\nLong State Name" as long1
+  long1 : Just a test
+  [*] --> long1
+  long1 --> long1 : New Data
+  long1 --> ProcessData : Enough Data
+}
+State3 --> State3 : Failed
+State3 --> [*] : Succeeded / Save Result
+State3 --> [*] : Aborted
+ 
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=110mm]{state_002.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Concurrent state}
+
+You can define concurrent state into a composite state using the "\texttt{--}"
+symbol as separator.
+
+\begin{lstlisting}
+@startuml
+
+[*] --> Active
+
+state Active {
+  [*] -> NumLockOff
+  NumLockOff --> NumLockOn : EvNumLockPressed
+  NumLockOn --> NumLockOff : EvNumLockPressed
+  --
+  [*] -> CapsLockOff
+  CapsLockOff --> CapsLockOn : EvCapsLockPressed
+  CapsLockOn --> CapsLockOff : EvCapsLockPressed
+  --
+  [*] -> ScrollLockOff
+  ScrollLockOff --> ScrollLockOn : EvCapsLockPressed
+  ScrollLockOn --> ScrollLockOff : EvCapsLockPressed
+} 
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=150mm]{state_003.png}
+\end{center}
+        
+% ========================================================================
+\newpage \subsection{Arrow direction}
+
+You can use \texttt{->} for horizontal arrows. It is possible to force arrow's
+direction using the following syntax:
+
+\begin{itemize}
+\item \texttt{-down->} (default arrow)
+\item \texttt{-right->} or \texttt{->}
+\item \texttt{-left->}
+\item \texttt{-up->}
+\end{itemize}
+
+\begin{lstlisting}
+@startuml
+
+[*] -up-> First
+First -right-> Second
+Second --> Third
+Third -left-> Last
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=50mm]{state_004.png}
+\end{center}
+        
+You can shorten the arrow by using only the first character of the direction
+(for example, \texttt{-d-} instead of \texttt{-down-}) or the two first
+characters (\texttt{-do-}).
+
+Please note that you should not abuse this functionnality : \textit{GraphViz}
+gives usually good results without tweaking.
+
+% ========================================================================
+\newpage \subsection{Note}
+
+You can alse define notes using:
+\begin{itemize}
+  \item \texttt{note left of},
+  \item \texttt{note right of},
+  \item \texttt{note top of},
+  \item \texttt{note bottom of}  
+\end{itemize}
+keywords. You can also define notes on several lines.
+
+\begin{lstlisting}
+@startuml
+
+[*] --> Active
+Active --> Inactive
+
+note left of Active : this is a short\nnote
+
+note right of Inactive
+  A note can also
+  be defined on
+  several lines
+end note
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=90mm]{state_005.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{More in notes}
+
+You can put notes on composite states.
+
+\begin{lstlisting}
+@startuml
+
+[*] --> NotShooting
+
+state "Not Shooting State" as NotShooting {
+  state "Idle mode" as Idle
+  state "Configuring mode" as Configuring
+  [*] --> Idle
+  Idle --> Configuring : EvConfig
+  Configuring --> Idle : EvConfig
+}
+
+note right of NotShooting : This is a note on a composite state
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=90mm]{state_006.png}
+\end{center}
+        
+
+        
+
+        

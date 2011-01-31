@@ -1,0 +1,758 @@
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+
+\section{Class Diagram}
+
+% ========================================================================
+\subsection{Relations between classes}
+
+\begin{description}
+\item Relations between classes are defined using the following symbols : 
+
+\begin{tabular}{|l|l|l|} \hline
+Extension & \texttt{<|--} & 
+\includegraphics[width=6mm]{img/extends01.png}
+
+\\ \hline
+Composition & \texttt{*--} &
+\includegraphics[width=7mm]{img/sym03.png}
+
+\\ \hline
+Agregation & \texttt{o--} &
+\includegraphics[width=7mm]{img/sym01.png}
+
+\\ \hline
+\end{tabular}
+
+\item It is possible to replace "\texttt{--}" by "\texttt{..}" to have a dotted
+line.
+
+\item Knowing thoses rules, it is possible to draw the following drawings: 
+\end{description}
+
+\begin{lstlisting}
+@startuml
+Class01 <|-- Class02
+Class03 *-- Class04
+Class05 o-- Class06
+Class07 .. Class08
+Class09 -- Class10
+Class11 <|.. Class12
+Class13 --> Class14
+Class15 ..> Class16
+Class17 ..|> Class18
+Class19 <--* Class20
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=170mm]{class.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Label on relations}
+
+\begin{description}
+\item It is possible a add a label on the relation, using "\texttt{:}", followed
+by the text of the label.
+\item For cardinality, you can use double-quotes \texttt{""} on each side
+of the relation.
+\end{description}
+
+\begin{lstlisting}
+@startuml
+
+Class01 "1" *-- "many" Class02 : contains
+
+Class03 o-- Class04 : agregation
+
+Class05 --> "1" Class06
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=80mm]{class_001.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Adding methods}
+
+\begin{description}
+\item To declare fields and methods, you can use the symbol "\texttt{:}"
+followed by the field's or method's name.
+\item The system checks for parenthesis to choose between methods and fields.
+\end{description}
+
+\begin{lstlisting}
+@startuml
+Object <|-- ArrayList
+
+Object : equals()
+ArrayList : Object[] elementData
+ArrayList : size()
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=25mm]{class_002.png}
+\end{center}
+
+\begin{description}
+\item It is also possible to group between brackets \texttt{\{\}}
+all fields and methods.
+\end{description}
+
+\begin{lstlisting}
+@startuml
+class Dummy {
+  String data
+  void methods()
+}
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=25mm]{class_003.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Defining visibility}
+
+\begin{description}
+\item When you define methods or fields, you can use characters to define the
+visibility of the corresponding item:
+\end{description}
+
+\begin{tabular}{|c|c|c|l|} \hline
+\texttt{-} & 
+\includegraphics[width=2mm]{img/PRIVATE_FIELD.png} &
+\includegraphics[width=2mm]{img/PRIVATE_METHOD.png} &
+\texttt{private}
+\\ \hline
+
+\texttt{\#} & 
+\includegraphics[width=2mm]{img/PROTECTED_FIELD.png} &
+\includegraphics[width=2mm]{img/PROTECTED_METHOD.png} &
+\texttt{protected}
+\\ \hline
+
+\texttt{\~} & 
+\includegraphics[width=2mm]{img/PACKAGE_PRIVATE_FIELD.png} &
+\includegraphics[width=2mm]{img/PACKAGE_PRIVATE_METHOD.png} &
+\texttt{package private}
+\\ \hline
+
+\texttt{+} & 
+\includegraphics[width=2mm]{img/PUBLIC_FIELD.png} &
+\includegraphics[width=2mm]{img/PUBLIC_METHOD.png} &
+\texttt{public}
+\\ \hline
+\end{tabular}
+
+\vskip 10mm
+
+\begin{lstlisting}
+@startuml
+class Dummy {
+  -field1
+  #field2
+  ~method1()
+  +method2()
+}
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=20mm]{class_004.png}
+\end{center}
+
+\vskip 10mm
+
+\begin{description}
+\item You can turn off this feature using the
+\texttt{skinparam classAttributeIconSize 0} command :
+\end{description}
+
+\begin{lstlisting}
+@startuml
+skinparam classAttributeIconSize 0
+class Dummy {
+  -field1
+  #field2
+  ~method1()
+  +method2()
+}
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=20mm]{class_005.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Notes and stereotypes}
+
+\begin{description}
+\item Stereotypes are defined with the \texttt{class} keyword, "\texttt{<<}" and
+"\texttt{>>}".
+\item You can alse define notes using \texttt{note left of},
+\texttt{note right of}, \texttt{note top of}, \texttt{note bottom of} keywords.
+\item A note can be also define alone with the \texttt{note} keywords, then linked to
+other objects using the "\texttt{..}" symbol.
+\end{description}
+
+\begin{lstlisting}
+@startuml
+class Object << general >>
+Object <|--- ArrayList
+
+note top of Object : In java, every class\nextends this one.
+
+note "This is a floating note" as N1
+note "This note is connected\nto several objects." as N2
+Object .. N2
+N2 .. ArrayList
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=70mm]{class_006.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{More on notes}
+
+It is also possible to use few html tags like :
+\begin{itemize}
+\item \texttt{$<$b$>$}
+\item \texttt{$<$u$>$}
+\item \texttt{$<$i$>$}
+\item \texttt{$<$s$>$}, \texttt{$<$del$>$}, \texttt{$<$strike$>$}
+\item \texttt{$<$font color="\#AAAAAA"$>$} or \texttt{$<$font
+color="colorName"$>$}
+\item \texttt{$<$color:\#AAAAAA$>$} or \texttt{$<$color:colorName$>$}
+\item \texttt{$<$size:nn$>$} to change font size
+\item \texttt{$<$img src="file"$>$} or \texttt{$<$img:file$>$} : the file
+must be accessible by the filesystem
+\end{itemize}
+
+You can also have a note on several lines.
+
+\begin{lstlisting}
+@startuml
+
+note top of Object
+  In java, every <u>class</u>
+  <b>extends</b>
+  <i>this</i> one.
+end note
+
+note as N1
+  This <size:10>note</size> is <u>also</u>
+  <b><color:royalBlue>on several</color>
+  <s>words</s> lines
+  And this is hosted by <img:sourceforge.jpg>
+end note
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=90mm]{class_007.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Abstract class and interface}
+
+You can declare a class as abstract using "\texttt{abstract}" or
+"\texttt{abstract class}" keywords. The class will be printed in italic.
+
+You can use the \texttt{interface} and \texttt{enum} keywords too.
+
+\begin{lstlisting}
+@startuml
+
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+ArrayList : Object[] elementData
+ArrayList : size()
+
+enum TimeUnit
+TimeUnit : DAYS
+TimeUnit : HOURS
+TimeUnit : MINUTES
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=80mm]{class_008.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Using non-letters}
+
+If you want to use non-letters in the class (or enum...) display, you can either :
+
+\begin{itemize}
+  \item Use the as keyword in the class definition
+  \item Put quotes \texttt{""} around the class name
+\end{itemize}
+
+\begin{lstlisting}
+@startuml
+class "This is my class" as class1
+class class2 as "It works this way too"
+
+class2 *-- "foo/dummy" : use
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=80mm]{class_009.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Hide attributes, methods...}
+
+\begin{description}
+\item You can parameterize the display of classes using the
+\texttt{hide}/\texttt{show} command.
+
+\item The basic command is: \texttt{hide empty members}. This command will hide
+attributes or methods if they are empty.
+
+\item Instead of \texttt{empty members}, you can use:
+\end{description}
+
+\begin{itemize}
+    \item \texttt{empty fields} or \texttt{empty attributes} for empty fields,
+    \item \texttt{empty methods} for empty methods,
+    \item \texttt{fields} or \texttt{attributes} which will hide fields, even if
+    they are described,
+    \item \texttt{methods} wich will hide methods, even if they are described,
+    \item \texttt{members} wich will hide fields and methods, even if they are
+    described,
+    \item \texttt{circle} for the circled character in front of class name,
+    \item \texttt{stereotype} for the stereotype. 
+\end{itemize}
+
+You can also provide, just after the \texttt{hide} or \texttt{show} keyword:
+
+\begin{itemize}
+    \item  \texttt{class} for all classes,
+    \item  \texttt{interface} for all interfaces,
+    \item  \texttt{enum} for all enums,
+    \item  \texttt{<<foo1>>} for classes which are stereotyped with
+    \textit{foo1},
+    \item  an existing class name.
+\end{itemize}
+
+You can use several \texttt{show}/\texttt{hide} commands to define rules and
+exceptions.
+
+\begin{lstlisting}
+@startuml
+class Dummy1 {
+  +myMethods()
+}
+
+class Dummy2 {
+  +hiddenMethod()
+}
+
+class Dummy3 <<Serializable>> {
+	String name
+}
+
+hide members
+hide <<Serializable>> circle
+show Dummy1 method
+show <<Serializable>> fields
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=90mm]{class_010.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Specific Spot}
+
+Usually, a spotted character (C, I, E or A) is used for classes, interface, enum and abstract classes.
+But you can define your own spot for a class when you define the stereotype, adding a single character
+and a color, like in this example:
+
+\begin{lstlisting}
+@startuml
+
+class System << (S,#FF7700) Singleton >>
+class Date << (D,orchid) >>
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=60mm]{class_011.png}
+\end{center}
+		
+% ========================================================================
+\newpage \subsection{Packages}
+
+You can define a package using the \texttt{package} keyword, and optionally
+declare a background color for your package (Using a html color code or name).
+When you declare classes, they are automatically put in the last used package,
+and you can close the package definition using the \texttt{end package} keyword.
+You can also use brackets \{ \}.
+
+Note that package definitions can be nested.
+
+\begin{lstlisting}
+@startuml
+
+package "Classic Collections" #DDDDDD {
+  Object <|-- ArrayList
+}
+
+package net.sourceforge.plantuml #Snow
+  Object <|-- Demo1
+  Demo1 *- Demo2
+end package
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=80mm]{class_012.png}
+\end{center}
+		
+
+You can also define links between packages, like in the following example:
+\begin{lstlisting}
+@startuml
+
+package foo1.foo2
+end package
+
+package foo1.foo2.foo3 {
+  class Object
+}
+
+foo1.foo2 +-- foo1.foo2.foo3
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=50mm]{class_013.png}
+\end{center}
+		
+		
+% ========================================================================
+\newpage \subsection{Namespaces}
+
+In packages, the name of a class is the unique identifier of this class.
+It means that you cannot have two classes with the very same name in different packages.
+In that case, you should use namespaces instead of packages.
+
+You can refer to classes from other namespaces by fully qualify them.
+Classes from the default namespace are qualified with a starting dot.
+
+Note that you don't have to explicitly create namespace : a fully qualified class
+is automatically put in the right namespace.
+
+\begin{lstlisting}
+@startuml
+
+class BaseClass
+
+namespace net.dummy #DDDDDD
+    .BaseClass <|-- Person
+    Meeting o-- Person
+    
+    .BaseClass <|- Meeting
+
+end namespace
+
+namespace net.foo {
+  net.dummy.Person  <|- Person
+  .BaseClass <|-- Person
+
+  net.dummy.Meeting o-- Person
+}
+
+BaseClass <|-- net.unused.Person
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=85mm]{class_014.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Changing arrows direction}
+
+By default, links between classes have two dashes \texttt{--} and are verticaly
+oriented. It is possible to use horizontal link by putting a single dash (or dot) like this:
+
+\begin{lstlisting}
+@startuml
+Room o- Studient
+Room *-- Chair
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=40mm]{class_015.png}
+\end{center}
+
+You can also change directions by reversing the link:
+\begin{lstlisting}
+@startuml
+Studient -o Room
+Chair --* Room
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=40mm]{class_016.png}
+\end{center}
+
+It is also possible to change arrow direction by adding \texttt{left},
+\texttt{right}, \texttt{up} or \texttt{down} keywords inside the arrow:
+
+\begin{lstlisting}
+@startuml
+foo -left-> dummyLeft 
+foo -right-> dummyRight 
+foo -up-> dummyUp 
+foo -down-> dummyDown
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=70mm]{class_017.png}
+\end{center}
+
+You can shorten the arrow by using only the first character of the direction
+(for example, \texttt{-d-} instead of \texttt{-down-}) or the two first
+characters (\texttt{-do-})
+
+Please note that you should not abuse this functionnality : \textit{GraphViz}
+gives usually good results without tweaking.
+
+% ========================================================================
+\subsection{Lollipop interface}
+
+You can also define lollipops interface on classes, using the following syntax:
+
+\begin{itemize}
+    \item  \texttt{bar ()- foo},
+    \item  \texttt{bar ()-- foo},
+    \item  \texttt{foo -() bar}
+\end{itemize}
+
+\begin{lstlisting}
+@startuml
+class foo
+bar ()- foo
+@enduml
+\end{lstlisting}
+
+
+\begin{center}
+\includegraphics[width=40mm]{class_018.png}
+\end{center}
+
+% ========================================================================
+\subsection{Title the diagram}
+
+The title \texttt{keywords} is used to put a title.
+You can use title and end title keywords for a longer title, as in sequence diagrams.
+
+\begin{lstlisting}
+@startuml
+title Simple <b>example</b>\nof title 
+
+Object <|-- ArrayList
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=25mm]{class_019.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Association classes}
+
+You can define \textit{association class} after that a relation has been defined
+between two classes, like in this example:
+
+\begin{lstlisting}
+@startuml
+Student : Name
+Student "0..*" - "1..*" Course
+(Student, Course) .. Enrollment
+
+Enrollment : drop()
+Enrollment : cancel()
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=50mm]{class_020.png}
+\end{center}
+
+You can define it in another direction:
+
+\begin{lstlisting}
+@startuml
+Student : Name
+Student "0..*" -- "1..*" Course
+(Student, Course) . Enrollment
+
+Enrollment : drop()
+Enrollment : cancel()
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=35mm]{class_021.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Skinparam}
+
+You can use the \texttt{skinparam} command to change colors and fonts for the
+drawing. You can use this command :
+
+\begin{itemize}
+  \item In the diagram definition, like any other commands,
+  \item In an included file,
+  \item In a configuration file, provided in the command line or the ANT task.
+\end{itemize}
+
+\begin{lstlisting}
+@startuml
+
+skinparam classBackgroundColor PaleGreen
+skinparam classArrowColor SeaGreen
+skinparam classBorderColor SpringGreen
+skinparam stereotypeCBackgroundColor YellowGreen
+
+Class01 "1" *-- "many" Class02 : contains
+
+Class03 o-- Class04 : agregation
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=50mm]{class_022.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Skinned Stereotypes}
+You can define specific color and fonts for stereotyped classes.
+
+\begin{lstlisting}
+@startuml
+
+skinparam class {
+	BackgroundColor PaleGreen
+	ArrowColor SeaGreen
+	BorderColor SpringGreen
+	BackgroundColor<<Foo>> Wheat
+	BorderColor<<Foo>> Tomato
+}
+skinparam stereotypeCBackgroundColor YellowGreen
+skinparam stereotypeCBackgroundColor<<Foo>> DimGray
+
+Class01 <<Foo>>
+Class01 "1" *-- "many" Class02 : contains
+
+Class03 <<Foo>> o-- Class04 : agregation
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=60mm]{class_023.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Splitting large files}
+
+Sometimes, you will get some very large image files.
+You can use the "\texttt{page (hpages)x(vpages)}" command to split the generated
+image into several files :
+\begin{itemize}
+  \item \textit{hpages} is a number that indicated the number of horizontal
+  pages,
+  \item \textit{vpages} is a number that indicated the number of vertical pages. 
+\end{itemize}
+
+
+\begin{lstlisting}
+@startuml
+' Split into 4 pages
+page 2x2
+
+class BaseClass
+
+namespace net.dummy #DDDDDD
+    .BaseClass <|-- Person
+    Meeting o-- Person
+    
+    .BaseClass <|- Meeting
+
+end namespace
+
+namespace net.foo {
+  net.dummy.Person  <|- Person
+  .BaseClass <|-- Person
+
+  net.dummy.Meeting o-- Person
+}
+
+BaseClass <|-- net.unused.Person
+@enduml
+\end{lstlisting}
+		
+\begin{center}
+	\fbox{\includegraphics[width=45mm]{class_024.png}}
+	\hspace*{4mm}
+	\fbox{\includegraphics[width=45mm]{class_024_002.png}}
+	\par
+	\vskip 4mm
+	\fbox{\includegraphics[width=45mm]{class_024_001.png}}
+	\hspace*{4mm}
+	\fbox{\includegraphics[width=45mm]{class_024_003.png}}
+\end{center}
+	

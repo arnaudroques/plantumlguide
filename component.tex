@@ -1,0 +1,283 @@
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+
+\section{Component Diagram}
+
+% ========================================================================
+\subsection{Components}
+
+\begin{description}
+\item Components must be bracketed.
+\item You can also use the \texttt{component} keyword to defines a component.
+\item And you can define an alias, using the \texttt{as} keyword.
+\item This alias will be used latter, when defining relations.
+\end{description}
+
+\begin{lstlisting}
+@startuml
+
+[First component]
+[Another component] as Comp2  
+component Comp3
+component [Last\ncomponent] as Comp4
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=125mm]{component.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Interfaces}
+
+\begin{description}
+\item Interface can be defined using the "\texttt{()}" symbol (because this
+looks like a circle).
+\item You can also use the \texttt{interface} keyword to defines a usecase.
+\item And you can define an alias, using the \texttt{as} keyword.
+\item This alias will be used latter, when defining relations.
+\item We will see latter that interface declaration is optional.
+\end{description}
+
+\begin{lstlisting}
+@startuml
+
+() "First Interface"
+() "Another interface" as Interf2
+interface Interf3
+interface "Last\ninterface" as Interf4
+
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=105mm]{component_001.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Basic example}
+Links between elements are made using combinaisons of dotted line
+"\texttt{..}", straight line "\texttt{--}", and arrows "\texttt{-->}" symbols.
+
+\begin{lstlisting}
+@startuml
+
+DataAccess - [First Component] 
+[First Component] ..> HTTP : use
+
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=65mm]{component_002.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Using notes}
+
+You can use the
+\begin{itemize}
+  \item \texttt{note left of}, 
+  \item \texttt{note right of},
+  \item \texttt{note top of},
+  \item \texttt{note bottom of},  
+\end{itemize}
+keywords to define notes related to a single object.
+
+A note can  also be defined alone with the \texttt{note} keywords, then linked
+to other objects using the "\texttt{..}" symbol.
+
+\begin{lstlisting}
+@startuml
+
+interface "Data Access" as DA
+
+DA - [First Component] 
+[First Component] ..> HTTP : use
+
+note left of HTTP : Web Service only
+
+note right of [First Component]
+  A note can also
+  be on several lines
+end note
+
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=105mm]{component_003.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Grouping Components}
+
+You can use the \texttt{package} keyword to group components and interfaces
+together.
+
+\begin{lstlisting}
+@startuml
+
+package "Some Group" {
+  HTTP - [First Component]
+  [Another Component]
+}
+ 
+package "Other Groups" {
+  FTP - [Second Component]
+  [First Component] --> FTP
+}
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=120mm]{component_004.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Changing arrows direction}
+
+By default, links between classes have two dashes \texttt{--}
+ and are verticaly oriented. It is possible to use horizontal link by putting a
+ single dash (or dot) like this:
+
+\begin{lstlisting}
+@startuml
+[Component] --> Interface1
+[Component] -> Interface2
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=50mm]{component_005.png}
+\end{center}
+
+You can also change directions by reversing the link:
+
+\begin{lstlisting}
+@startuml
+Interface1 <-- [Component]
+Interface2 <- [Component]
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=50mm]{component_006.png}
+\end{center}
+
+It is also possible to change arrow direction by adding \texttt{left},
+\texttt{right}, \texttt{up} or \texttt{down} keywords inside the arrow:
+
+\begin{lstlisting}
+@startuml
+[Component] -left-> left 
+[Component] -right-> right 
+[Component] -up-> up
+[Component] -down-> down
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=75mm]{component_007.png}
+\end{center}
+
+You can shorten the arrow by using only the first character of the direction
+(for example, \texttt{-d-} instead of \texttt{-down-}) or the two first
+characters (\texttt{-do-}).
+
+Please note that you should not abuse this functionnality : \textit{GraphViz}
+gives usually good results without tweaking.
+
+% ========================================================================
+\subsection{Title the diagram}
+
+The \texttt{title} keywords is used to put a title.
+You can use \texttt{title} and \texttt{end title} keywords for a longer title,
+as in sequence diagrams.
+
+\begin{lstlisting}
+@startuml
+title Very simple component\ndiagram
+
+interface "Data Access" as DA
+
+DA - [First Component] 
+[First Component] ..> HTTP : use
+
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=70mm]{component_008.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Skinparam}
+
+You can use the \texttt{skinparam} command to change colors and fonts for the
+drawing. You can use this command :
+
+\begin{itemize}
+\item In the diagram definition, like any other commands,
+\item In an included file,
+\item In a configuration file, provided in the command line or the ANT task.
+\end{itemize}
+
+\begin{lstlisting}
+@startuml
+skinparam component {
+  FontSize 13
+  InterfaceBackgroundColor RosyBrown
+  InterfaceBorderColor orange
+  BackgroundColor<< Apache >> Red
+  BorderColor<< Apache >> #FF6655
+  FontName Courier
+  BorderColor black
+  BackgroundColor gold
+  ArrowFontName Impact
+  ArrowColor #FF6655
+  ArrowFontColor #777777
+}
+
+() "Data Access" as DA
+
+DA - [First Component] 
+[First Component] ..> () HTTP : use
+HTTP - [Web Server] << Apache >>
+@enduml
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=75mm]{component_009.png}
+\end{center}
+				

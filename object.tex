@@ -1,0 +1,135 @@
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+
+\section{Objects Diagram}
+
+% ========================================================================
+\subsection{Definition of objects}
+
+You define instance of objects using the \texttt{object} keywords.
+
+\begin{lstlisting}
+@startuml
+object firstObject
+object "My Second Object" as o2
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=60mm]{object.png}
+\end{center}
+
+% ========================================================================
+\subsection{Relations between objects}
+
+\begin{description}
+\item Relations between objects are defined using the following symbols : 
+
+\begin{tabular}{|l|l|l|} \hline
+Extension & \texttt{<|--} & 
+\includegraphics[width=6mm]{img/extends01.png}
+
+\\ \hline
+Composition & \texttt{*--} &
+\includegraphics[width=7mm]{img/sym03.png}
+
+\\ \hline
+Agregation & \texttt{o--} &
+\includegraphics[width=7mm]{img/sym01.png}
+
+\\ \hline
+\end{tabular}
+
+\item It is possible to replace "\texttt{--}" by "\texttt{..}" to have a dotted
+line.
+
+\item Knowing thoses rules, it is possible to draw the following drawings: 
+\end{description}
+
+\begin{lstlisting}
+@startuml
+object Object01
+object Object02
+object Object03
+object Object04
+object Object05
+object Object06
+object Object07
+object Object08
+
+Object01 <|-- Object02
+Object03 *-- Object04
+Object05 o-- "4" Object06
+Object07 .. Object08 : some labels
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=100mm]{object_001.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Adding fields}
+
+To declare fields, you can use the symbol "\texttt{:}" followed by the field's
+name.
+
+\begin{lstlisting}
+@startuml
+
+object user
+
+user : name = "Dummy"
+user : id = 123
+
+
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=25mm]{object_002.png}
+\end{center}
+
+It is also possible to ground between brackets \texttt{\{\}} all fields.
+
+\begin{lstlisting}
+@startuml
+object user {
+  name = "Dummy"
+  id = 123
+}
+@enduml
+\end{lstlisting}
+\begin{center}
+\includegraphics[width=25mm]{object_003.png}
+\end{center}
+
+
+
+	

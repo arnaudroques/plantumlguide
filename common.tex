@@ -1,0 +1,145 @@
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+% ========================================================================
+% PlantUML : a free UML diagram generator
+% ========================================================================
+%
+% (C) Copyright 2009, Arnaud Roques
+%
+% Project Info:  http://plantuml.sourceforge.net
+% 
+% This file is part of PlantUML.
+%
+% PlantUML is free software; you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% PlantUML distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+% or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+% License for more details.
+%
+% You should have received a copy of the GNU General Public
+% License along with this library; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+% USA.
+%
+% [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+% in the United States and other countries.]
+%
+% Original Author:  Arnaud Roques
+% 
+
+\section{Common commands}
+
+% ========================================================================
+\subsection{Footer and header} 
+
+\begin{description}
+\item You can use the commands \texttt{header} or \texttt{footer} to add a
+footer or a header on any generated diagram. 
+\item You can optionally specify if you want a \texttt{center}, \texttt{left} or
+\texttt{right} footer/header, by adding a keywork. 
+\item As for title, it is possible to define a header or a footer on several lines. 
+\item It is also possible to put some HTML into the header or footer 
+\end{description}
+
+
+\begin{lstlisting}
+@startuml
+Alice -> Bob: Authentication Request 
+
+header 
+<font color=red>Warning:</font> This is a demonstration diagram.
+Do not use in production.
+endheader 
+
+center footer Generated for demonstration 
+@enduml 
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=50mm]{common.png}
+\end{center}
+
+% ========================================================================
+\newpage \subsection{Zoom}
+
+You can use the scale command to zoom the generated image.
+You can use either a number or a fraction to define the scale factor.
+You can also specify either width or height (in pixel).
+And you can also give both width and height : the image is scaled to fit inside the specified dimension.
+
+\begin{itemize}
+\item \texttt{scale 1.5}, 
+\item \texttt{scale 2/3}, 
+\item \texttt{scale 200 width}, 
+\item \texttt{scale 200 height}, 
+\item \texttt{scale 200*100} 
+\end{itemize}
+
+\begin{lstlisting}
+@startuml
+scale 180*90
+Bob->Alice : hello
+@enduml 
+
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=30mm]{common_001.png}
+\end{center}
+
+
+% ========================================================================
+\newpage \subsection{Rotation} 
+
+Sometimes, and especially for printing, you may want to rotate the generated image, so that it fits 
+better in the page. 
+You can use the \texttt{rotate} command for this. 
+
+\begin{lstlisting}
+@startuml
+rotate
+
+title Simple Usecase\nwith one actor 
+"Use the application" as (Use)
+User -> (Use) 
+
+@enduml 
+
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[width=30mm]{common_002.png}
+\end{center}
+
